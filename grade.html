@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Grade 9</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to right, #845EC2, #00C9A7, #4D8076);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .content {
+      max-width: 500px;
+      padding: 20px;
+    }
+
+    .welcome-heading {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .subtitle {
+      font-size: 18px;
+      margin-bottom: 40px;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .grade-button {
+      padding: 18px 35px;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .grade-button:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.07);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+    }
+
+    @media (max-width: 500px) {
+      .welcome-heading {
+        font-size: 28px;
+      }
+      .subtitle {
+        font-size: 16px;
+      }
+      .grade-button {
+        font-size: 20px;
+        padding: 16px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="welcome-heading">Welcome to Grade 9</div>
+    <div class="subtitle">A new journey begins — explore, learn, and grow smarter every day.</div>
+    <button class="grade-button" onclick="window.location.href='https://github.com/Tesfaaking/Online_quiz/first.html'">Enter Grade 9</button>
+  </div>
+</body>
+</html>

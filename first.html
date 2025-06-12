@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subjects</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to right, #845EC2, #00C9A7, #4D8076);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .content-wrapper {
+      text-align: center;
+      color: white;
+    }
+
+    .mtf {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .mtf a button {
+      background-color: #00cc66;
+      color: white;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px #00ff99;
+    }
+
+    .mtf a button:hover {
+      background-color: #00ff99;
+      color: black;
+      transform: scale(1.1);
+    }
+    .title {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 250px;
+      margin: 0 auto;
+    }
+
+    .subject-button {
+      padding: 15px 25px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .subject-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 6px 25px rgba(255, 255, 255, 0.4);
+    }
+
+    @media (max-width: 400px) {
+      .title {
+        font-size: 24px;
+      }
+      .subject-button {
+        font-size: 18px;
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mtf">
+    <a href="https://github.com/Tesfaaking/Online_quiz/grade.html"><button>&loarr;</button></a>
+  </div>
+  <div class="content-wrapper">
+    <div class="title">Select a Subject</div>
+    <div class="button-container">
+      <div class="subject-button" onclick="window.location.href='https://github.com/Tesfaaking/Online_quiz/Chem.html'">Chemistry</div>
+      <div class="subject-button" onclick="window.location.href='https://github.com/Tesfaaking/Online_quiz/Phy.html'">Physics</div>
+      <div class="subject-button" onclick="window.location.href='https://github.com/Tesfaaking/Online_quiz/Bio.html'">Biology</div>
+      <div class="subject-button" onclick="window.location.href='https://github.com/Tesfaaking/Online_quiz/math.html'">Maths</div>
+    </div>
+  </div>
+</body>
+</html>

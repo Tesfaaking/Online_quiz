@@ -1,0 +1,285 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chemistry Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #845EC2, #00C9A7,#4D8076);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .quiz-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      width: 90%;
+      max-width: 700px;
+      text-align: center;
+      animation: popIn 0.6s ease;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #e8f5e9;
+      font-size: 2rem;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .mtf {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .mtf a button {
+      background-color: #00cc66;
+      color: white;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px #00ff99;
+    }
+
+    .mtf a button:hover {
+      background-color: #00ff99;
+      color: black;
+      transform: scale(1.1);
+    }
+
+    .option {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .option:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+      border-color: #ffffff50;
+    }
+
+    .option.correct {
+      background-color: #81c784;
+      border-color: #66bb6a;
+    }
+
+    .option.wrong {
+      background-color: #e57373;
+      border-color: #ef5350;
+    }
+
+    #next {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #aed581;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    #next:hover {
+      background-color: #9ccc65;
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Media Queries for Responsive Design */
+    @media (max-width: 768px) {
+      .quiz-container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      .option {
+        font-size: 1rem;
+      }
+
+      #next {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .quiz-container {
+        padding: 20px 15px;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      h2 {
+        font-size: 0.95rem;
+      }
+
+      .option {
+        font-size: 0.95rem;
+      }
+
+      #next {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mtf">
+    <a href="https://github.com/Tesfaaking/Online_quiz/grade.html"><button>&loarr;</button></a>
+  </div>
+  <div class="quiz-container">
+    <h1>Chemistry Quiz</h1>
+    <div id="quiz" class="fade-in"></div>
+    <button id="next">Next</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { question: "Who proposed the periodic law stating that properties of elements are periodic functions of their atomic masses?", options: ["John Dalton", "Dmitri Mendeleev", "Julius Lothar Meyer", "ListType"], answer: 1 },
+      { question: "Mendeleev left gaps in his periodic table to:", options: ["Reduce the table’s size", "Accommodate undiscovered elements", "Group transition metals separately", "Align elements alphabetically"], answer: 1 },
+      { question: "The modern periodic table arranges elements based on:", options: ["Atomic mass ", "Valence electrons", "Atomic number", "Chemical reactivity"], answer: 2},
+      { question: "Elements in the same group of the periodic table have:?", options: ["Similar atomic masses", "The same number of electron shells", "Identical atomic numbers ", "Similar chemical properties"], answer: 3 },
+      { question: "Which group contains the alkali metals?", options: ["Group 1 ", "Group 2", "Group 17", "Group 18 "], answer: 0},
+      { question: "Across a period (left to right), atomic radius generally:", options: ["Increases", "Decreases", "Remains constant", "Fluctuates randomly"], answer: 1 },
+      { question: "Which element has the highest electronegativity?", options: ["Sodium (Na)", "Fluorine (F)", "Chlorine (Cl)", "Oxygen (O)"], answer: 1 },
+      { question: "Ionization energy is lowest for:", options: ["Noble gases", "Alkali metals", "Halogens", "Transition metals"], answer: 1},
+      { question: "Elements in Group 17 are called:", options: ["Alkaline earth metals", "Halogens", "Chalcogens", "Noble gases"], answer: 3 },
+      { question: "Which block of the periodic table contains the lanthanides and actinides?", options: ["s-block", "p-block", "d-block", "f-block"], answer: 3 },
+      { question: "In the periodic table, metalloids are located:", options: ["On the far left", "Along the zigzag line", "In Group 18  ", "In the d-block  "], answer: 1 },
+      { question: "Which element is a noble gas?", options: ["Nitrogen (N)  ", "Oxygen (O)", "Neon (Ne)", "Sulfur (S)"], answer: 2 },
+      { question: "Chemical bonds form to achieve:", options: ["Higher energy states", "Stable electron configurations  ", "Increased atomic mass  ", "Reduced nuclear charge"], answer: 1 },
+      { question: "Ionic bonds typically form between:", options: ["Two metals ", "Two nonmetals", "A metal and a nonmetal", "Noble gases"], answer: 2 },
+      { question: "In NaCl, the bond is ionic because:", options: ["Electrons are shared equally", "Sodium gains electrons", "Chlorine donates electrons", "Electrons are transferred from Na to Cl"], answer: 3 },
+      { question: "A covalent bond involves:", options: ["Electron transfer", "Electron sharing", "Metallic lattice formation","Hydrogen bonding"], answer: 3 },
+      { question: "Which molecule has a double covalent bond?", options: ["H2", "O2", "N2", "Cl2"], answer: 1 },
+      { question: "Metallic bonding is characterized by:", options: ["Localized electrons", "Delocalized Electrons", "Electron transfer", "Hydrogen bridges"], answer: 1 },
+      { question: "Which compound contains an ionic bond?", options: ["CO₂ ", "H₂O ", "MgO", "CH₄"], answer:2 },
+      { question: "The shape of a water molecule (H₂O) is bent due to:", options: ["Ionic repulsion", "Presence of lone pairs", "Triple bonding", "Metallic character"], answer: 1 }, 
+      { question: "Atoms achieve a noble gas configuration in bonding to fulfill the:", options: ["Hund’s rule", "Pauli exclusion principle", "Aufbau principle", "Octet rule  "], answer: 3},
+      { question: "Which substance exhibits covalent network bonding?", options: ["Sodium chloride (NaCl)", "Diamond (C)  ", "Iron (Fe) ", "Water (H₂O)  "], answer:1 },
+      { question: "In a polar covalent bond:", options: ["Electrons are shared equally", "Electrons are transferred", "Electrons are shared unequally", "No electrons are involved"], answer: 2 },
+      { question: "**Why do metals conduct electricity?", options: ["Due to fixed positive ions", "Because of delocalized electrons", "Via covalent bonds", "Through hydrogen bonding"], answer: 1 },
+      { question:"Which bond is the strongest?", options: ["Hydrogen bond", "Single covalent bond", "Triple covalent bond", "Ionic bond in gaseous state"], answer: 2 }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    const quiz = document.getElementById("quiz");
+    const nextBtn = document.getElementById("next");
+    const result = document.getElementById("result");
+
+    function loadQuestion() {
+      quiz.innerHTML = "";
+      const q = questions[currentQuestion];
+      const questionEl = document.createElement("h2");
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      quiz.appendChild(questionEl);
+
+      q.options.forEach((option, index) => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.textContent = option;
+        btn.addEventListener("click", () => selectOption(btn, index));
+        quiz.appendChild(btn);
+      });
+
+      quiz.classList.add("fade-in");
+      nextBtn.style.display = "none";
+    }
+
+    function selectOption(selected, index) {
+      const correct = questions[currentQuestion].answer;
+      const options = document.querySelectorAll(".option");
+
+      options.forEach(opt => {
+        opt.style.pointerEvents = "none";
+        opt.classList.remove("correct", "wrong");
+      });
+
+      if (index === correct) {
+        selected.classList.add("correct");
+        score++;
+      } else {
+        selected.classList.add("wrong");
+        options[correct].classList.add("correct");
+      }
+
+      nextBtn.style.display = "inline-block";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    function showResult() {
+      quiz.innerHTML = "";
+      nextBtn.style.display = "none";
+      result.innerHTML = `✅ You scored <strong>${score}</strong> out of <strong>${questions.length}</strong>!`;
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>

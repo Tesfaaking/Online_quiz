@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biology Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:linear-gradient(to right,#845EC2,#00C9A7,#4D8076);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .quiz-container {
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      width: 90%;
+      max-width: 700px;
+      text-align: center;
+      animation: popIn 0.6s ease;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #e8f5e9;
+      font-size: 2rem;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .mtf {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .mtf a button {
+      background-color: #00cc66;
+      color: white;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px #00ff99;
+    }
+
+    .mtf a button:hover {
+      background-color: #00ff99;
+      color: black;
+      transform: scale(1.1);
+    }
+
+    .option {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .option:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+      border-color: #ffffff50;
+    }
+
+    .option.correct {
+      background-color: #81c784;
+      border-color: #66bb6a;
+    }
+
+    .option.wrong {
+      background-color: #e57373;
+      border-color: #ef5350;
+    }
+
+    #next {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #aed581;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    #next:hover {
+      background-color: #9ccc65;
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Media Queries for Responsive Design */
+    @media (max-width: 768px) {
+      .quiz-container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      .option {
+        font-size: 1rem;
+      }
+
+      #next {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .quiz-container {
+        padding: 20px 15px;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      h2 {
+        font-size: 0.95rem;
+      }
+
+      .option {
+        font-size: 0.95rem;
+      }
+
+      #next {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mtf">
+    <a href="https://github.com/Tesfaaking/Online_quiz/grade.html"><button>&loarr;</button></a>
+  </div>
+  <div class="quiz-container">
+    <h1>Biology Quiz</h1>
+    <div id="quiz" class="fade-in"></div>
+    <button id="next">Next</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { question: "What is the main purpose of reproduction?", options: ["respiration", "To produce offspring", "movement", "digestion"], answer: 1 },
+      { question: "Which of the following is a characteristic of asexual reproduction? A) Requires two parents?", options: ["Requires two parents", "Involves gamets", "produces identical offspring", "Always uses flowers"], answer: 2 },
+      { question: "Sexual reproduction involves the fusion of: A) Two zygotes?", options: ["Two zygotes", "Two nuclei from gamet ", "Two somatic cells", "Two mitochondria"], answer: 1 },
+      { question: "Binary fission is common among :", options: ["humans", "Bacteria", "Birds", "frogs"], answer: 1 },
+      { question:  "In budding, the organism divides into:", options: ["spores", "equal parts", "unequal parts", "fragments"], answer: 2 },
+      { question: "An example of fragmentation is seen in:?", options: ["Yeast","Hydra","spirogyra","Amoeba"], answer: 2 },
+      { question: "Which structure allows vegetative propagation?", options: ["Flowers", "Fruits", "stem,roots,leaves", "seeds"], answer: 2 },
+      { question: "Gametes are formed through?", options: ["mitosis", "meiosis", "Fertilization", "Fragmentation"], answer: 1 },
+      { question: "Where does internal fertilization typically occur?", options: ["Testes", "Vagina", "utrus", "oviduct"], answer: 3 },
+      { question: "The function of the prostate gland is to:?", options: ["store sperm", "secrete alkaline fluid","produce testosteron", "From semen",], answer: 1 },
+      { question: "The scrotum's main role is to:", options: ["produce hormones", "Nourish sperm", "Maintain temperature", "store urine"], answer: 2 },
+      { question: "What hormone triggers development of female secondary sex characteristics", options: ["LH", "Estrogen", "progesterone", "FSH"], answer: 1 },
+      { question: "What protects the developing fetus inside the uterus?", options: ["Follicle", " Endometrium", "Amniotic fluid", "Corpus luteum"], answer: 2 },
+      { question: "The first phase of the menstrual cycle is the:", options: ["Follicular phase", " Luteal phase", "Flow phase", "ovulation"], answer: 2 },
+      { question: "Which hormone thickens the uterine lining?", options: ["FSH", "Estrogen", "progesterone", "LH"], answer: 3 },
+      { question: "Which hormone thickens the uterine lining?", options: ["Testosterone", "Estrogen", "oxytocin", "Insulin"], answer:2},
+      { question: "The placenta is connected to the fetus by the:", options: ["Cervix", "Endometrium", "Urethra", "Umbilical cord"], answer: 3 },
+      { question: "?", options: ["0", "Not defined", "No value", "Empty string"], answer: 2 },
+      { question: "Which of these is a valid variable name in Python?", options: ["", "name_2", "name-2", "@name"], answer: 1 },
+      { question: "Which method is considered a natural method of contraception?", options: ["condom", "IUD", "Fertility", "Diaphragm"], answer: 1 },
+      { question: "Which STI is caused by Treponema pallidum?", options: ["Gonorrhea", "HIV", "Chlamydia", "Syphilis"], answer: 3 },
+      { question: "Which of the following can increase prostate cancer risk in men if untreated?", options: ["Gonorrhea", "Trichomoniasis", "Syphilis", "HIV"], answer: 1 },
+      { question: "What hormone stimulates follicle development?", options: ["LH", "Estrogen", "Testosterone", "FSH"], answer: 3 },
+      { question: "What is puberty?", options: ["old age", "Menstrual cessation", "Time when sexual maturity is reached", "process of cell division"], answer: 3},
+      { question: "The zygote is?", options: ["sperm", "A fertilized egg", "unfertilized egg", "A gamet"], answer: 1 }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    const quiz = document.getElementById("quiz");
+    const nextBtn = document.getElementById("next");
+    const result = document.getElementById("result");
+
+    function loadQuestion() {
+      quiz.innerHTML = "";
+      const q = questions[currentQuestion];
+      const questionEl = document.createElement("h2");
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      quiz.appendChild(questionEl);
+
+      q.options.forEach((option, index) => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.textContent = option;
+        btn.addEventListener("click", () => selectOption(btn, index));
+        quiz.appendChild(btn);
+      });
+
+      quiz.classList.add("fade-in");
+      nextBtn.style.display = "none";
+    }
+
+    function selectOption(selected, index) {
+      const correct = questions[currentQuestion].answer;
+      const options = document.querySelectorAll(".option");
+
+      options.forEach(opt => {
+        opt.style.pointerEvents = "none";
+        opt.classList.remove("correct", "wrong");
+      });
+
+      if (index === correct) {
+        selected.classList.add("correct");
+        score++;
+      } else {
+        selected.classList.add("wrong");
+        options[correct].classList.add("correct");
+      }
+
+      nextBtn.style.display = "inline-block";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    function showResult() {
+      quiz.innerHTML = "";
+      nextBtn.style.display = "none";
+      result.innerHTML = `✅ You scored <strong>${score}</strong> out of <strong>${questions.length}</strong>!`;
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>

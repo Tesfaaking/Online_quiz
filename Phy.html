@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programming Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:linear-gradient(to right,#845EC2,#00C9A7,#4D8076);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .quiz-container {
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      width: 90%;
+      max-width: 700px;
+      text-align: center;
+      animation: popIn 0.6s ease;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #e8f5e9;
+      font-size: 2rem;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .mtf {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .mtf a button {
+      background-color: #00cc66;
+      color: white;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px #00ff99;
+    }
+
+    .mtf a button:hover {
+      background-color: #00ff99;
+      color: black;
+      transform: scale(1.1);
+    }
+
+    .option {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .option:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+      border-color: #ffffff50;
+    }
+
+    .option.correct {
+      background-color: #81c784;
+      border-color: #66bb6a;
+    }
+
+    .option.wrong {
+      background-color: #e57373;
+      border-color: #ef5350;
+    }
+
+    #next {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #ff946a;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    #next:hover {
+      background-color: #95ffb7;
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Media Queries for Responsive Design */
+    @media (max-width: 768px) {
+      .quiz-container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      .option {
+        font-size: 1rem;
+      }
+
+      #next {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .quiz-container {
+        padding: 20px 15px;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      h2 {
+        font-size: 0.95rem;
+      }
+
+      .option {
+        font-size: 0.95rem;
+      }
+
+      #next {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mtf">
+    <a href="https://github.com/Tesfaaking/Online_quiz/grade.html"><button>&loarr;</button></a>
+  </div>
+  <div class="quiz-container">
+    <h1>Physics Quiz</h1>
+    <div id="quiz" class="fade-in"></div>
+    <button id="next">Next</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { question: "A man walks 20meters east and 15meters west. What was his displacement??", options: ["5m east", "5m west", "35m east", "35m west"], answer: 0 },
+      { question: "Which of the following quantities specifies its speed with direction ?", options: ["Displacement", "Distance", "momentum", "velocicy"], answer: 3 },
+      { question: "Aboy runs from one end to another end of a semicircular track with radius 140m. his displacement is ?", options: ["280m", "180m", "140m", "439.6m"], answer: 3 },
+      { question: ". A man walks 8m towards the east and then 6m towards the north. The magnitude of his displacement is?", options: ["10m", "14m", "2m", "0m"], answer: 0},
+      { question: ". A particles moves from (2, 3)m to (4,1)m. The magnitude of the displacement is: ?", options: ["2√2m", "3√2m", "2√3m", "2m"], answer: 0 },
+      { question: ".In a uniform motion, which one the following properties of motion remain constant?", options: ["Distance", "Acceleration", "Displacement", "Velocity"], answer: 3 },
+      { question: " A car moves 60km/hr for 2hrs and then at 40 km/hr for 3hrs, what is the average speed of the car?", options: ["50km/hr", "48km/hr", "68km/hr", "30km/hr"], answer: 1 },
+      { question: "A pulley system with 6 supporting rope segments has a mechanical advantage of: ", options: ["12", "9", "6", "3"], answer: 2 },
+      { question: " The wheel and axle is a modified form of which simple machine?", options: ["Lever", "Inclined plane", "pully", "wedge"], answer: 0 },
+      { question: "If efficiency is 75% and input work is 400J, what is the output work ?", options: ["300J", "320J", "350J", "380J"], answer: 0 },
+      { question: "A 5 segment block and tackle lifts 1000N load. What is the effort, if the system is an ideal ?", options: ["200N", "250N", "300N", "400N"], answer: 0 },
+      { question: "Which of the following is a first-class lever ?", options: ["Nutcracer", "wheelbarrow", "crowbar", "Tweezer"], answer: 2 },
+      { question: " Which of the following is a third-class lever?", options: ["seesaw", "pliers", "Tongs", "wheelbarrow"], answer: 2 },
+      { question: "A screw with a pitch of 2mm and circumference of 20cm has an ideal mechanical advantage of: ?", options: ["10", "20", "50", "100"], answer: 3 },
+      { question: "For a fixed mass, if the speed of an object is tripled, what will be its kinetic energy?", options: ["2", "4", "3", "9"], answer: 3 },
+      { question: "If the velocity of an object is quadrupled, by what factor does a kinetic energy of an object increase?", options: ["4", "8", "12", "16"], answer: 3 },
+      { question: "A boy carrying a box on his head is walking on a level road from one place to another place is doing:", options: ["No work","positive","maximum work","Negative work",], answer: 0 },
+      { question: "Based on question NO 21, what is the distance covered by the person? ?", options: ["10m", "20m", "10πm", "20πm"], answer: 3 },
+      { question: "A car travels at 30m/s. How far will it travel in 5seconds", options: ["6m", "30m", "120m", "150m"], answer: 3 },
+      { question: " Kinetic energy of a car is 20000J at 20m/s. if the velocity is halved, kinetic energy becomes:", options: ["40000J", "6000J", "5000J", "1000J"], answer: 2 },
+      { question: "Work done by centripetal force on an object moving in a circle is:?", options: ["positive", "Negative", "zero", "Maximum"], answer: 2 },
+      { question: "When pulling a mass up an incline with friction, which force does not contribute to work?", options: ["Friction", "Gravitational component", "Normal force", "Applied force"], answer: 2 },
+      { question: "A 5kg block slides 8m down a 300incline. If friction opposes motion with 10N, what is totalwork done", options: ["80J", " 120J", "200J", "320J"], answer: 2 },
+      { question: "Doubling both mass and velocity increases kinetic energy by factor of:", options: ["2", "4", "8", "16"], answer: 1 }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    const quiz = document.getElementById("quiz");
+    const nextBtn = document.getElementById("next");
+    const result = document.getElementById("result");
+
+    function loadQuestion() {
+      quiz.innerHTML = "";
+      const q = questions[currentQuestion];
+      const questionEl = document.createElement("h2");
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      quiz.appendChild(questionEl);
+
+      q.options.forEach((option, index) => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.textContent = option;
+        btn.addEventListener("click", () => selectOption(btn, index));
+        quiz.appendChild(btn);
+      });
+
+      quiz.classList.add("fade-in");
+      nextBtn.style.display = "none";
+    }
+
+    function selectOption(selected, index) {
+      const correct = questions[currentQuestion].answer;
+      const options = document.querySelectorAll(".option");
+
+      options.forEach(opt => {
+        opt.style.pointerEvents = "none";
+        opt.classList.remove("correct", "wrong");
+      });
+
+      if (index === correct) {
+        selected.classList.add("correct");
+        score++;
+      } else {
+        selected.classList.add("wrong");
+        options[correct].classList.add("correct");
+      }
+
+      nextBtn.style.display = "inline-block";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    function showResult() {
+      quiz.innerHTML = "";
+      nextBtn.style.display = "none";
+      result.innerHTML = `✅ You scored <strong>${score}</strong> out of <strong>${questions.length}</strong>!`;
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>

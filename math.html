@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #845EC2, #00C9A7,#4D8076);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .quiz-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      width: 90%;
+      max-width: 700px;
+      text-align: center;
+      animation: popIn 0.6s ease;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #e8f5e9;
+      font-size: 2rem;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .mtf {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .mtf a button {
+      background-color: #00cc66;
+      color: white;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px #00ff99;
+    }
+
+    .mtf a button:hover {
+      background-color: #00ff99;
+      color: black;
+      transform: scale(1.1);
+    }
+
+    .option {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .option:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.03);
+      border-color: #ffffff50;
+    }
+
+    .option.correct {
+      background-color: #81c784;
+      border-color: #66bb6a;
+    }
+
+    .option.wrong {
+      background-color: #e57373;
+      border-color: #ef5350;
+    }
+
+    #next {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #aed581;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    #next:hover {
+      background-color: #9ccc65;
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Media Queries for Responsive Design */
+    @media (max-width: 768px) {
+      .quiz-container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      .option {
+        font-size: 1rem;
+      }
+
+      #next {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .quiz-container {
+        padding: 20px 15px;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      h2 {
+        font-size: 0.95rem;
+      }
+
+      .option {
+        font-size: 0.95rem;
+      }
+
+      #next {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mtf">
+    <a href="https://github.com/Tesfaaking/Online_quiz/grade.html"><button>&loarr;</button></a>
+  </div>
+  <div class="quiz-container">
+    <h1>Math Quiz</h1>
+    <div id="quiz" class="fade-in"></div>
+    <button id="next">Next</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { question: "The sum of two numbers is 36. Five times one number is equal to 4 times the other. The greater of the two numbers is:", options: ["20", "12", "16", "15"], answer: 0 },
+      { question: "There are two classrooms, A and B. If 7 students are shifted from A to B, then B will have twice the number of students as A. If 3 students are sent from B to A, then both the classrooms will have the same number of students. The positive difference between the number of students in the two classrooms is:", options: ["6", "5", "8", "7"], answer: 0 },
+      { question: "A 3-digit number is such that its units’ digit, tens’ digit and hundreds’ digit are in the ratio 2 : 3 : 4. The sum of this number and the number obtained by reversing its digits is 1332. Find the positive difference between the 3-digit number and the number formed by reversing its digit.", options: ["594", "323", "396", "414"], answer: 2},
+      { question: " If x + y = 8 and 2x + y = 10, then what is the value of x?", options: ["2", "5", "4", "6"], answer: 0},
+      { question: "If x + y + 3 = 0, then find the value of x3 + y3 - 9xy + 9.", options: ["-36", "-18", "36", "18"], answer: 1 },
+      { question: "The age of the father is twice the sum of the ages of his two children. After 20 years, his age will be equal to the sum of the ages of his children. Find the age of the father. ", options: ["10yrs", "20yrs", "30yrs", "40yrs"], answer: 3 },
+      { question: "For what value of m will the system of equations 17x + my + 102 = 0 and 23x + 299y + 138 = 0 have infinite number of solutions ?", options: ["221", "223", "220", "219"], answer: 0 },
+      { question: "The difference between two numbers is 5. If 25 is subtracted from the smaller number and 20 is added to the greater number the ratio becomes 1 : 2. What is the greater number?", options: ["80", "90", "85", "75"], answer: 0},
+      { question: "When the price of an article is reduced by Birr 4 then 12 more articles can be purchased for Birr 288. The original price of each article is", options: ["Birr 24", "Birr 8", "Birr 12", "Birr 6"], answer: 2 },
+      { question: "If x = 4 + the square root of 5, what is the value of  (x2 +1/x2?", options: ["54", "40", "72", "62"], answer: 1 },
+      { question: "The graph of linear equation 6x-2y=8 cuts the y-axis at", options: ["(0,-4) ", "(0,4) ", "(0,2) ", "(0,-2) "], answer: 0 },
+      { question: ".If x=4 and y=-2 are the solution for the equation 4px+2y=12 Then the value of p is", options: ["1","2", "3", "4"], answer: 0 },
+      { question: "For what value of k, the following pair of linear equations have infinitely many solutions:kx + 3y - (k - 3) = 0       and    12x + ky - k = 0", options: ["0", "3", "4", "6"], answer: 3 },
+      { question: "For what value of t, the following pair of equations has unique solution?4x + ty + 6 = 0 and  2x + 2y + 2 = 0", options: ["1", "2", "1&2", "4"], answer: 2 },
+      { question: "The relation between K1 and K2 for which the system of linear equations K1x + 3y = 8 and 4x + K2y= 16 represents coincident lines, is:", options: [" K2 = 3K1", "K2 + 3K1= 0 ", "K2 = K1", " K1 + K2 = 0"], answer: 0 },
+      { question: " If the equations 14x + 8y + 5 = 0 and 21x - ky - 7 = 0 have no solution, then the value of k is:", options: ["12", "-12", "8", "-16"], answer: 1 },
+      { question: "If a(a + b + c) = 126, b(a + b + c) = 147 and c(a + b + c) = 168, then value of (a + b + c) = ?", options: ["23", "21", "41", "22"], answer: 1 },
+      { question: "The sum of two digits and the number formed by interchanging its digit is 110. If ten is subtracted from the first number, the new number is 4 more than 5 times of the sum of the digits in the first number. Find the first number.", options: ["46", "48", "64", "84"], answer: 2 },
+      { question: "Rozly can row downstream 20km in 2 hours, and the upstream 4km in 2 hours. What will be the speed of rowing in still water?", options: ["6km/hr  ", " 4km/hr ", "3km/h ", " 7km/hr"], answer: 0 },
+      { question: " What is the relation between a real number and its point on a number line?", options: ["A) A real number corresponds to multiple points on the number line.", " Each real number corresponds to unique point on the number line. ", " Only positive real numbers are represented on the number line. ", "Real numbers cannot be plotted on the number line. "], answer: 1 },
+      { question: " What does the absolute value of a number x represent?", options: ["It is the reciprocal of x.", "The opposite of the number x.", "The distance of x from zero on the number line. ", " The positive value of x."], answer: 2 },
+      { question: ". In school of 140 students, 85 take Mathematics and 100 take English. If each student takes at least one of these subjects, then which one of the following is not true?", options: ["45 students take both subjects ", ") 40 students take only Mathematics  ", "65 students take only English subject ", "95 students take exactly one of the subjects  "], answer: 2 },
+      { question: "Two different Squares have a total area of 274   and the sum of their perimeters is 88cm. What are the lengths of the sides of the squares in cm?", options: [" 8 ,14 ", "7, 15", "9, 13 ", " 6, 16 "], answer: 1 },
+      { question: " Assume three strings of different lengths 120cm, 180cm and 360cm cut in to equal lengths. What is the greatest possible length of each piece?", options: ["40cm", " 50cm", "60cm", "30cm"], answer: 2 },
+      { question: "What does the point of intersection of two linear represent? " , options: ["The point where the graphs are parallel. ", " The point that satisfies both equations simultaneously", "The midpoint  between the two lines ", "The y-intercept of both equations"], answer: 1 }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    const quiz = document.getElementById("quiz");
+    const nextBtn = document.getElementById("next");
+    const result = document.getElementById("result");
+
+    function loadQuestion() {
+      quiz.innerHTML = "";
+      const q = questions[currentQuestion];
+      const questionEl = document.createElement("h2");
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
+      quiz.appendChild(questionEl);
+
+      q.options.forEach((option, index) => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.textContent = option;
+        btn.addEventListener("click", () => selectOption(btn, index));
+        quiz.appendChild(btn);
+      });
+
+      quiz.classList.add("fade-in");
+      nextBtn.style.display = "none";
+    }
+
+    function selectOption(selected, index) {
+      const correct = questions[currentQuestion].answer;
+      const options = document.querySelectorAll(".option");
+
+      options.forEach(opt => {
+        opt.style.pointerEvents = "none";
+        opt.classList.remove("correct", "wrong");
+      });
+
+      if (index === correct) {
+        selected.classList.add("correct");
+        score++;
+      } else {
+        selected.classList.add("wrong");
+        options[correct].classList.add("correct");
+      }
+
+      nextBtn.style.display = "inline-block";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    function showResult() {
+      quiz.innerHTML = "";
+      nextBtn.style.display = "none";
+      result.innerHTML = `✅ You scored <strong>${score}</strong> out of <strong>${questions.length}</strong>!`;
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
